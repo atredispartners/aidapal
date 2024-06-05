@@ -49,9 +49,7 @@ Once accepted, the Hex-Rays output will be updated with your changes. A full exa
 
 ![simple_usage](https://github.com/atredispartners/aidapal/assets/17786253/3f3845e1-3641-4f8c-9279-18368bc93e2f)
 
-The speed of generation is going to depend on the hardware you are execting on, the above example is representative of usage on ARM (Mx) based macbooks. 
-
-
+The speed of generation is going to depend on the hardware you are executing on, the above example is representative of usage on ARM (Mx) based macbooks. 
 
 
 
