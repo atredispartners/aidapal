@@ -9,13 +9,13 @@ description:
 """
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget,QScrollArea
 from PyQt5.QtGui import QPalette, QColor
 import textwrap
 
 import ida_kernwin,ida_hexrays,ida_funcs,ida_name
 
-example_input = {'function_name': 'ExampleName', 'comment': "Example Comment", 'variables': [{'original_name': 'a1', 'new_name': 'example1'}, {'original_name': 'a2', 'new_name': 'example2'}, {'original_name': 'a3', 'new_name': 'example3'}, {'original_name': 'v3', 'new_name': 'examplev3'}]}
+example_input = {'function_name': 'ExampleName', 'comment': "Example Comment", 'variables': [{'original_name': 'a1', 'new_name': 'example1'}, {'original_name': 'a2', 'new_name': 'example2'}, {'original_name': 'a3', 'new_name': 'example3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}]}
 
 class FunctionNameWidget(QWidget):
     accepted = True
@@ -111,6 +111,13 @@ class VariableWidget(QWidget):
 
 
         group_box.setLayout(group_layout)
+        scroll_area = QScrollArea()
+        scroll_area.setWidgetResizable(True)
+        scroll_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
+        scroll_area.setWidget(group_box)
+        layout.addWidget(scroll_area)
+
+
         layout.addWidget(group_box)
 
         self.setLayout(layout)
@@ -141,8 +148,8 @@ class aiDAPalUIForm(ida_kernwin.PluginForm):
         self.parent = self.FormToPyQtWidget(form)
         
         self.PopulateForm()
-        self.parent.setMinimumWidth(800)
-        self.parent.setFixedSize(self.parent.sizeHint())
+        #self.parent.setMinimumWidth(800)
+        #self.parent.setFixedSize(self.parent.sizeHint())
 
 
     def PopulateForm(self):
@@ -157,6 +164,8 @@ class aiDAPalUIForm(ida_kernwin.PluginForm):
         # Create buttons
         accept_button = QtWidgets.QPushButton("Accept")
         cancel_button = QtWidgets.QPushButton("Cancel")
+
+        layout1.addStretch()
 
         # Connect buttons to functions
         accept_button.clicked.connect(self.on_accept_clicked)
