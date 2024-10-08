@@ -13,7 +13,7 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget,QScrollArea
 from PyQt5.QtGui import QPalette, QColor
 import textwrap
 
-import ida_kernwin,ida_hexrays,ida_funcs,ida_name
+import ida_kernwin,ida_hexrays,ida_funcs,ida_name,ida_bytes
 
 example_input = {'function_name': 'ExampleName', 'comment': "Example Comment", 'variables': [{'original_name': 'a1', 'new_name': 'example1'}, {'original_name': 'a2', 'new_name': 'example2'}, {'original_name': 'a3', 'new_name': 'example3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}]}
 
@@ -134,11 +134,13 @@ class aiDAPalUIForm(ida_kernwin.PluginForm):
 
     ida_pal_results = None
     current_func = None
+    current_data = None
 
-    def __init__(self,ida_pal_results,current_func):
+    def __init__(self,ida_pal_results,current_func,current_data):
         super(aiDAPalUIForm, self).__init__()
         self.ida_pal_results = ida_pal_results
         self.current_func = current_func
+        self.current_data = current_data
 
     def OnCreate(self, form):
         """
@@ -223,11 +225,16 @@ class aiDAPalUIForm(ida_kernwin.PluginForm):
         if self.ida_pal_results["comment"]:
             # split the comment into lines of 80 characters max
             new_cmt = '\n'.join(textwrap.wrap(self.ida_pal_results['comment'], width=80))
+            # If function
             if self.current_func:
                 cf = ida_funcs.get_func(self.current_func.entry_ea)
                 ida_funcs.set_func_cmt(cf,new_cmt,False)
+            # If data
+            if self.current_data:
+                ida_bytes.set_cmt(self.current_data,new_cmt,False)
         
-        if self.ida_pal_results["function_name"]:
+        # Only update function if we are working with one
+        if self.ida_pal_results["function_name"] and self.current_func:
             new_name = f"{self.ida_pal_results['function_name']}_{hex(self.current_func.entry_ea)[2:]}"
             print(f'Trying function name update {new_name}')
             if ida_name.set_name(self.current_func.entry_ea,new_name,ida_name.SN_CHECK):
@@ -235,11 +242,17 @@ class aiDAPalUIForm(ida_kernwin.PluginForm):
 
         for var in self.ida_pal_results['variables']:
             if var['accepted']:
-                print(f"trying function var - {var['original_name']} - {var['new_name']}")
-                if ida_hexrays.rename_lvar(self.current_func.entry_ea,var['original_name'],var['new_name']):
-                    print(f"Updated function var - {var['original_name']} - {var['new_name']}")
-        
-        self.current_func.refresh_func_ctext()
+                # If function
+                if self.current_func:
+                    print(f"trying function var - {var['original_name']} - {var['new_name']}")
+                    if ida_hexrays.rename_lvar(self.current_func.entry_ea,var['original_name'],var['new_name']):
+                        print(f"Updated function var - {var['original_name']} - {var['new_name']}")
+                # If data
+                if self.current_data:
+                    ida_name.set_name(self.current_data,var['new_name'],ida_name.SN_CHECK)
+                    print(f"trying data var - {var['original_name']} - {var['new_name']}")
+        if self.current_func:
+            self.current_func.refresh_func_ctext()
         self.Close(0)
 
 
@@ -253,12 +266,12 @@ class aiDAPalUIForm(ida_kernwin.PluginForm):
         pass
 
 class aiDAPalUI:
-    def __init__(self, ida_pal_results=None,cur_func=None):
+    def __init__(self, ida_pal_results=None,cur_func=None,cur_data=None):
         if ida_pal_results is None:
             self.ida_pal_results = example_input
         else:
             self.ida_pal_results = ida_pal_results
-            self.plg = aiDAPalUIForm(self.ida_pal_results,cur_func)
+            self.plg = aiDAPalUIForm(self.ida_pal_results,cur_func,cur_data)
             self.plg.Show("aiDAPal Results")
 
 
