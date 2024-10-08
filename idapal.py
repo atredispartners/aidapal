@@ -25,7 +25,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # this list holds the list of models registered with Ollama to be accessible from the plugin.
-models = ['aidapal','llamapal31q8']
+models = ['aidapal']
 # where ollama service is running
 ollama_url = "http://127.0.0.1:11434/api/generate"
 # most important part - zlib compressed ascii art
