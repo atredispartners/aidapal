@@ -15,7 +15,7 @@ import textwrap
 
 import ida_kernwin,ida_hexrays,ida_funcs,ida_name,ida_bytes
 
-example_input = {'function_name': 'ExampleName', 'comment': "Example Comment", 'variables': [{'original_name': 'a1', 'new_name': 'example1'}, {'original_name': 'a2', 'new_name': 'example2'}, {'original_name': 'a3', 'new_name': 'example3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}]}
+example_input = {'function_name': 'ExampleName', 'comment': "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque orci odio, feugiat nec nisi vel, tempus laoreet nunc. Aliquam libero felis, lacinia non imperdiet sit amet, volutpat vitae odio. Phasellus in ligula sit amet nibh posuere malesuada vel sit amet dui. Donec gravida nec elit vitae mollis. Donec sollicitudin, mauris pellentesque tempus sodales, velit orci tempor sapien, at rutrum urna tellus vel mauris. Donec ac rhoncus nisi, vel consequat libero. In dictum neque ligula, sit amet ultricies eros facilisis eu. Donec justo leo, suscipit quis ligula ut, blandit venenatis neque. Duis euismod viverra tellus, quis dapibus purus facilisis condimentum. Donec massa augue, vestibulum nec ipsum vulputate, feugiat volutpat mi. Sed nec nisl ex. Aliquam dapibus ligula ac orci hendrerit, id sodales leo tempus. Aenean vehicula metus vel pellentesque suscipit. Etiam vel dictum massa. Proin vitae varius sapien. Maecenas accumsan nulla rhoncus ipsum consequat, eget commodo sem finibus. Sed sed metus urna. Praesent vel nulla sed nunc feugiat fermentum a a tortor. Etiam auctor sit amet ligula eu tristique. Suspendisse sollicitudin, sem ut tincidunt volutpat, ipsum risus cursus nisl, non aliquet arcu ipsum eget massa. Fusce venenatis, leo eleifend luctus ultrices, quam odio fringilla augue, vitae tempus purus massa eu nulla. Cras a ullamcorper ligula.", 'variables': [{'original_name': 'a1', 'new_name': 'example1'}, {'original_name': 'a2', 'new_name': 'example2'}, {'original_name': 'a3', 'new_name': 'example3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}, {'original_name': 'v3', 'new_name': 'examplev3'}]}
 
 class FunctionNameWidget(QWidget):
     accepted = True
@@ -66,9 +66,20 @@ class CommentWidget(QWidget):
         comment_area.setWordWrap(True)
         comment_area.setMinimumWidth(500)
         
+        # Wrap the comment_area in a QScrollArea
+        scroll_area = QtWidgets.QScrollArea()
+        scroll_area.setWidgetResizable(True)  # Make the scroll area resizeable
+        scroll_area.setWidget(comment_area)  # Set the QLabel as the widget inside the scroll area
+
+        # Add checkbox and scrollable comment area to the layout
         group_layout.addWidget(checkbox)
-        group_layout.addWidget(comment_area)
+        group_layout.addWidget(scroll_area)
+        
         group_box.setLayout(group_layout)
+        
+       
+        
+        
         layout.addWidget(group_box)
         self.setLayout(layout)
 
@@ -80,19 +91,24 @@ class VariableWidget(QWidget):
     accepted = True
     def __init__(self, variables):
         super(VariableWidget, self).__init__()
-        layout = QtWidgets.QGridLayout()
+        layout = QtWidgets.QVBoxLayout()
         layout.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
 
+        # Create the group box for the variables
         group_box = QtWidgets.QGroupBox("aiDAPal Variables")
+        group_box_layout = QtWidgets.QVBoxLayout()  # Layout to hold the title and the scroll area
+
+        # Create the inner grid layout
         group_layout = QtWidgets.QGridLayout()
-        group_layout.setAlignment(QtCore.Qt.AlignLeft| QtCore.Qt.AlignVCenter)
+        group_layout.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         group_layout.setSpacing(10)
         self.checkboxes = []
+
         columns = 3
         for i in range(len(variables)):
             row = i // columns
-            col = i % columns * 3  # Multiply by 3 for checkbox, original_name, and new_name
-            
+            col = (i % columns) * 3  # Multiply by 3 for checkbox, original_name, and new_name
+
             original_name = variables[i]['original_name']
             new_name = variables[i]['new_name']
             checkbox = QtWidgets.QCheckBox()
@@ -109,18 +125,21 @@ class VariableWidget(QWidget):
             frame.setLayout(frame_layout)
             group_layout.addWidget(frame, row, col)
 
+        # Create a QWidget to hold the group_layout (grid) and set it inside a QScrollArea
+        scroll_widget = QtWidgets.QWidget()
+        scroll_widget.setLayout(group_layout)
 
-        group_box.setLayout(group_layout)
-        scroll_area = QScrollArea()
+        # Create a scroll area for the grid content
+        scroll_area = QtWidgets.QScrollArea()
         scroll_area.setWidgetResizable(True)
-        scroll_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
-        scroll_area.setWidget(group_box)
-        layout.addWidget(scroll_area)
+        scroll_area.setWidget(scroll_widget)
 
-
+        # Add everything and ship
+        group_box_layout.addWidget(scroll_area)
+        group_box.setLayout(group_box_layout)
         layout.addWidget(group_box)
-
         self.setLayout(layout)
+
 
     def accepted_state_change(self, state):
         print(f'Accepted: {state == QtCore.Qt.Checked}')
@@ -271,8 +290,5 @@ class aiDAPalUI:
             self.ida_pal_results = example_input
         else:
             self.ida_pal_results = ida_pal_results
-            self.plg = aiDAPalUIForm(self.ida_pal_results,cur_func,cur_data)
-            self.plg.Show("aiDAPal Results")
-
-
-
+        self.plg = aiDAPalUIForm(self.ida_pal_results,cur_func,cur_data)
+        self.plg.Show("aiDAPal Results")
